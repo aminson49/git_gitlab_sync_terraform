@@ -1,0 +1,18 @@
+github_token = "ghp_your_token_here"
+gitlab_token = "glpat-your_token_here"
+github_owner = "your_username"
+gitlab_base_url = "https://gitlab.com"
+
+jenkins_webhook_url = "https://your-jenkins.com/github-webhook/"
+
+github_to_gitlab = {
+  github_repo_name    = "source_repo"
+  github_repo_full    = "owner/source_repo"
+  gitlab_project_path = "group/target_repo"
+}
+
+gitlab_to_github = {
+  github_repo_name    = "target_repo"
+  github_repo_full    = "owner/target_repo"
+  gitlab_project_path = "group/source_repo"
+}
