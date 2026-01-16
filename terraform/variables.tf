@@ -26,6 +26,70 @@ variable "jenkins_webhook_url" {
   type        = string
 }
 
+variable "jenkins_url" {
+  description = "Jenkins base URL (for job creation)"
+  type        = string
+}
+
+variable "jenkins_username" {
+  description = "Jenkins username (for job creation)"
+  type        = string
+}
+
+variable "jenkins_api_token" {
+  description = "Jenkins API token (for job creation)"
+  type        = string
+  sensitive   = true
+}
+
+variable "jenkins_job_enabled" {
+  description = "Whether to create a Jenkins job for GitHub->GitLab sync"
+  type        = bool
+  default     = false
+}
+
+variable "jenkins_job_name" {
+  description = "Jenkins job name for GitHub->GitLab sync"
+  type        = string
+  default     = "github-to-gitlab-sync"
+}
+
+variable "jenkins_job_branch" {
+  description = "Branch to build in Jenkins job"
+  type        = string
+  default     = "*/main"
+}
+
+variable "jenkins_scm_credentials_id" {
+  description = "Jenkins SCM credentials ID for Git repo checkout"
+  type        = string
+  default     = "github-token"
+}
+
+variable "jenkinsfile_enabled" {
+  description = "Whether to generate Jenkinsfile"
+  type        = bool
+  default     = true
+}
+
+variable "jenkins_github_credentials_id" {
+  description = "Jenkins credentials ID for GitHub token"
+  type        = string
+  default     = "github-token"
+}
+
+variable "jenkins_gitlab_credentials_id" {
+  description = "Jenkins credentials ID for GitLab token"
+  type        = string
+  default     = "gitlab-token"
+}
+
+variable "sync_script_enabled" {
+  description = "Whether to generate sync_repos.py"
+  type        = bool
+  default     = true
+}
+
 variable "github_to_gitlab" {
   description = "GitHub to GitLab sync configuration"
   type = object({

@@ -8,10 +8,10 @@ pipeline {
     }
     
     environment {
-        GITHUB_TOKEN = credentials('github-token')
-        GITLAB_TOKEN = credentials('gitlab-token')
-        GITHUB_REPO = 'aminson49/git_gitlab_sync'
-        GITLAB_REPO = 'poc-group1603702/gitlab_github_sync'
+        GITHUB_TOKEN = credentials('${jenkins_github_credentials_id}')
+        GITLAB_TOKEN = credentials('${jenkins_gitlab_credentials_id}')
+        GITHUB_REPO = '${github_repo_full}'
+        GITLAB_REPO = '${gitlab_project_path}'
     }
     
     stages {

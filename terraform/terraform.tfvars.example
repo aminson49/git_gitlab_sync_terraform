@@ -5,6 +5,23 @@ gitlab_base_url = "https://gitlab.com"
 
 jenkins_webhook_url = "https://your-jenkins.com/github-webhook/"
 
+# Jenkins job creation (optional)
+jenkins_url = "https://your-jenkins.com"
+jenkins_username = "your-jenkins-user"
+jenkins_api_token = "your-jenkins-api-token"
+jenkins_job_enabled = false
+jenkins_job_name = "github-to-gitlab-sync"
+jenkins_job_branch = "*/main"
+jenkins_scm_credentials_id = "github-token"
+
+# Optional Jenkinsfile generation settings
+jenkinsfile_enabled = true
+jenkins_github_credentials_id = "github-token"
+jenkins_gitlab_credentials_id = "gitlab-token"
+
+# Optional sync script generation
+sync_script_enabled = true
+
 github_to_gitlab = {
   github_repo_name    = "source_repo"
   github_repo_full    = "owner/source_repo"
