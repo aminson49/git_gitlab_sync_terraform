@@ -6,7 +6,6 @@ import os
 import subprocess
 import sys
 import json
-import requests
 from datetime import datetime
 
 # Timeout for git operations (in seconds)
@@ -20,6 +19,13 @@ GITHUB_REPO = os.getenv('GITHUB_REPO')  # username/repo format
 GITLAB_REPO = os.getenv('GITLAB_REPO')  # username/repo format
 GITHUB_API_BASE = 'https://api.github.com'
 GITLAB_API_BASE = os.getenv('GITLAB_API_BASE', 'https://gitlab.com/api/v4')
+
+def _get_requests():
+    try:
+        import requests
+        return requests
+    except Exception:
+        return None
 
 
 class RepoSyncer:
@@ -580,6 +586,11 @@ class RepoSyncer:
         """Copy issues from GitHub to GitLab"""
         if not GITHUB_REPO or not GITLAB_REPO:
             return
+
+        requests = _get_requests()
+        if requests is None:
+            print("Error: 'requests' package is required for issue sync.")
+            return
         
         print(f"Syncing issues: {GITHUB_REPO} -> {GITLAB_REPO}")
         
@@ -627,6 +638,11 @@ class RepoSyncer:
         """Copy issues from GitLab to GitHub"""
         if not GITHUB_REPO or not GITLAB_REPO:
             return
+
+        requests = _get_requests()
+        if requests is None:
+            print("Error: 'requests' package is required for issue sync.")
+            return
         
         print(f"Syncing issues: {GITLAB_REPO} -> {GITHUB_REPO}")
         
@@ -665,6 +681,10 @@ class RepoSyncer:
     
     def _get_gitlab_project_id(self):
         """Get the GitLab project ID - needed for API calls"""
+        requests = _get_requests()
+        if requests is None:
+            print("Error: 'requests' package is required for issue sync.")
+            return None
         try:
             url = f"{GITLAB_API_BASE}/projects/{GITLAB_REPO.replace('/', '%2F')}"
             response = requests.get(url, headers=self.gitlab_headers, timeout=API_TIMEOUT)

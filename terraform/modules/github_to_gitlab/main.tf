@@ -207,7 +207,6 @@ resource "null_resource" "push_generated_files" {
     push_message     = var.push_commit_message
     push_auth_enabled = tostring(var.push_auth_enabled)
     push_auth_username = var.push_auth_username
-    push_auth_token_hash = var.push_auth_enabled ? sha256(var.push_auth_token) : ""
   }
 
   provisioner "local-exec" {

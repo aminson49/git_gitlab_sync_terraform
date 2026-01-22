@@ -21,22 +21,11 @@ pipeline {
             }
         }
         
-        stage('Install Dependencies') {
-            steps {
-                sh '''
-                    python3 -m venv venv
-                    . ./venv/bin/activate
-                    pip install -r requirements.txt
-                '''
-            }
-        }
-        
         stage('Sync GitHub to GitLab') {
             steps {
                 timeout(time: 30, unit: 'MINUTES') {
                     sh '''
-                        . ./venv/bin/activate
-                        python sync_repos.py code github-to-gitlab
+                        python3 sync_repos.py code github-to-gitlab
                     '''
                 }
             }
