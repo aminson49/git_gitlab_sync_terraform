@@ -25,7 +25,7 @@ pipeline {
             steps {
                 timeout(time: 30, unit: 'MINUTES') {
                     sh '''
-                        python sync_repos.py code github-to-gitlab
+                        python3 sync_repos.py code github-to-gitlab
                     '''
                 }
             }
