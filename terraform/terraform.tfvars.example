@@ -13,6 +13,10 @@ jenkins_job_enabled = false
 jenkins_job_name = "github-to-gitlab-sync"
 jenkins_job_branch = "*/main"
 jenkins_scm_credentials_id = "github-token"
+jenkins_scm_credentials_enabled = true
+jenkins_scm_username = "your-github-username"
+jenkins_scm_token = "your-github-token"
+jenkins_scm_credentials_description = "GitHub SCM token"
 
 # Optional Jenkinsfile generation settings
 jenkinsfile_enabled = true
@@ -21,6 +25,20 @@ jenkins_gitlab_credentials_id = "gitlab-token"
 
 # Optional sync script generation
 sync_script_enabled = true
+
+# Optional push of generated files to git
+push_generated_files_enabled = false
+push_remote_name = "origin"
+push_branch = "main"
+push_commit_message = "Update generated sync files"
+push_auth_enabled = false
+push_auth_username = "x-access-token"
+push_auth_token = "your-github-token"
+
+# Terraform state bootstrap (S3 + DynamoDB)
+state_bootstrap_enabled = true
+state_bucket_name = "statefile"
+state_lock_table_name = "stafiletable"
 
 github_to_gitlab = {
   github_repo_name    = "source_repo"

@@ -11,5 +11,9 @@ provider "gitlab" {
 provider "jenkins" {
   server_url = var.jenkins_url
   username   = var.jenkins_username
-  api_token  = var.jenkins_api_token
+  password   = var.jenkins_api_token
+}
+
+provider "aws" {
+  region = var.aws_region
 }
