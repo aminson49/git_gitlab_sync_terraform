@@ -17,6 +17,43 @@ then Terraform creates the needed webhooks, CI variables, and files.
    - Terraform writes a `.gitlab-ci.yml` file for the GitLab pipeline.
    - When you push to GitLab, the pipeline pushes changes to GitHub.
 
+## Code map (where things live)
+
+- `terraform/main.tf`  
+  Wires the two modules (`github_to_gitlab_sync` and `gitlab_to_github_sync`).
+
+- `terraform/providers.tf`  
+  Provider configs for GitHub, GitLab, Jenkins, and AWS (state bootstrap).
+
+- `terraform/variables.tf`  
+  All input variables used by the project.
+
+- `terraform/modules/github_to_gitlab/*`  
+  Creates GitHub webhook, Jenkins job, credentials, and generated files.
+
+- `terraform/modules/gitlab_to_github/*`  
+  Creates GitLab CI variables and writes `.gitlab-ci.yml`.
+
+- `terraform/state_backend.tf`  
+  Creates S3 bucket + DynamoDB table (if enabled).
+
+## Important Terraform resources (in plain terms)
+
+- `github_repository_webhook`  
+  Adds the webhook so GitHub tells Jenkins when a push happens.
+
+- `gitlab_project_variable`  
+  Stores GitHub token/repo info in GitLab CI.
+
+- `jenkins_job`  
+  Creates the Jenkins pipeline job.
+
+- `local_file`  
+  Writes `Jenkinsfile`, `.gitlab-ci.yml`, and `sync_repos.py`.
+
+- `null_resource`  
+  Used to create Jenkins credentials and optionally push files to GitHub.
+
 ## Files Terraform generates
 
 - `Jenkinsfile` (in repo root)  
