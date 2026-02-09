@@ -43,7 +43,7 @@ resource "aws_dynamodb_table" "tf_lock" {
   }
 
   lifecycle {
-    prevent_destroy = true
+    prevent_destroy = false
   }
 
   tags = {
